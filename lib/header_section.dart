@@ -8,15 +8,15 @@ class HeaderSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/images/grid1.png'),
           fit: BoxFit.cover,
         ),
       ),
+      padding: const EdgeInsets.symmetric(vertical: 44),
       child: Column(
         children: [
-          SizedBox(height: 44),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
@@ -40,7 +40,7 @@ class HeaderSection extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 36),
+                const SizedBox(height: 36),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -54,15 +54,13 @@ class HeaderSection extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
-                          height: 1.6875, // = line-height: 27px
-                          letterSpacing: 0,
+                          height: 1.6875,
                         ),
                       ),
                     ),
                   ],
                 ),
-
-                SizedBox(height: 36),
+                const SizedBox(height: 36),
                 RoundedButton(
                   width: double.infinity,
                   label: "Join with Us",
@@ -73,18 +71,18 @@ class HeaderSection extends StatelessWidget {
                     letterSpacing: -0.3,
                     color: Colors.white,
                   ),
-                  color: Color(0xff002F6C),
-                  icon: Icon(
+                  color: const Color(0xff002F6C),
+                  icon: const Icon(
                     Icons.arrow_outward,
                     color: Colors.white,
                     size: 20,
                   ),
                   boarderWidth: 2,
                   height: 54,
-                  borderColor: Color(0xff002F6C),
+                  borderColor: const Color(0xff002F6C),
                   textColor: Colors.white,
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 RoundedButton(
                   width: double.infinity,
                   label: "View Online Classes",
@@ -98,19 +96,110 @@ class HeaderSection extends StatelessWidget {
                   color: Colors.white,
                   boarderWidth: 1,
                   height: 54,
-                  borderColor: Color(0xff002F6C),
-                  textColor: Color(0xff002F6C),
+                  borderColor: const Color(0xff002F6C),
+                  textColor: const Color(0xff002F6C),
                 ),
               ],
             ),
           ),
-
-          SizedBox(height: 27),
-          Text("data"),
-          SizedBox(height: 27),
+          const SizedBox(height: 27),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 13),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    _StatsColumn(
+                      number: "99",
+                      plusFontSize: 35,
+                      label: "Student\nSatisfaction",
+                    ),
+                    _StatsColumn(
+                      number: "45",
+                      plusFontSize: 35,
+                      label: "Expert\nTeachers",
+                    ),
+                    _StatsColumn(
+                      number: "88",
+                      plusFontSize: 35,
+                      label: "Top-Rated\nCourses",
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 27),
           Image.asset('assets/images/image_mobile.png', fit: BoxFit.cover),
         ],
       ),
+    );
+  }
+}
+
+class _StatsColumn extends StatelessWidget {
+  final String number;
+  final double plusFontSize;
+  final String label;
+
+  const _StatsColumn({
+    required this.number,
+    required this.label,
+    this.plusFontSize = 35,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Positioned(
+              bottom: 10,
+              left: -4,
+              right: -4,
+              height: 24,
+              child: Container(color: const Color(0xFFFFD230)),
+            ),
+            Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: number,
+                    style: GoogleFonts.inter(
+                      fontSize: 48,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+                  ),
+                  TextSpan(
+                    text: '+',
+                    style: GoogleFonts.inter(
+                      fontSize: plusFontSize,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        Text(
+          label,
+          textAlign: TextAlign.start,
+          style: GoogleFonts.inter(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            height: 1.42,
+            color: const Color(0xFF4A5565),
+          ),
+        ),
+      ],
     );
   }
 }

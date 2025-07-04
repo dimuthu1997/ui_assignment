@@ -9,20 +9,17 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(const MyApp());
+  runApp(const UiTaskApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class UiTaskApp extends StatelessWidget {
+  const UiTaskApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'UI Task',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
       home: const HomeScreen(),
     );
   }
