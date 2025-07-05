@@ -7,104 +7,170 @@ class BookSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/grid1.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Column(
-        children: [
-          SizedBox(height: 91),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              "Discover & Share Educational Books",
-              style: GoogleFonts.inter(
-                fontSize: 36,
-                fontWeight: FontWeight.w700,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        bool isWeb = constraints.maxWidth >= 900;
+        Widget exploreSection = Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            RoundedButton(
+              width: 243,
+              label: "Explore All Books",
+              color: const Color(0xff002F6C),
+              icon: const Icon(
+                Icons.arrow_outward,
+                color: Colors.white,
+                size: 20,
+              ),
+              boarderWidth: 2,
+              height: 55,
+              borderColor: const Color(0xff002F6C),
+              textColor: Colors.white,
+              labelStyle: GoogleFonts.inter(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                letterSpacing: -0.3,
                 height: 1.0,
-                letterSpacing: -2,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              "Need to publish your book here,",
+              style: GoogleFonts.inter(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                height: 1.5,
                 color: Colors.black,
               ),
             ),
-          ),
-          SizedBox(height: 60),
-          HorizontalCourseList(),
-          SizedBox(height: 28),
-          HorizontalCourseList(),
-          SizedBox(height: 50),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: [
-                RoundedButton(
-                  width: double.infinity,
-                  label: "Explore All Books",
-                  color: const Color(0xff002F6C),
-                  icon: const Icon(
-                    Icons.arrow_outward,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                  boarderWidth: 2,
-                  height: 54,
-                  borderColor: const Color(0xff002F6C),
-                  textColor: Colors.white,
-                  labelStyle: GoogleFonts.inter(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: -0.3,
-                    height: 1.0,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(height: 20),
+            const SizedBox(height: 4),
+            Text(
+              "Join Now",
+              style: GoogleFonts.inter(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                height: 1.5,
+                color: Color(0xff002F6C),
+                decoration: TextDecoration.underline,
+              ),
+            ),
+          ],
+        );
 
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Need to publish your book here,",
+        return Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image:
+                  isWeb
+                      ? const AssetImage('assets/images/grid3.png')
+                      : const AssetImage('assets/images/grid1.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Column(
+            children: [
+              const SizedBox(height: 91),
+
+              if (isWeb)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 112),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Text(
+                          "Discover & Share \nEducational Books",
+                          style: GoogleFonts.inter(
+                            fontSize: 48,
+                            fontWeight: FontWeight.w700,
+                            height: 1.0,
+                            letterSpacing: -2,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 40),
+                      Expanded(flex: 1, child: exploreSection),
+                    ],
+                  ),
+                )
+              else
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Discover & Share \nEducational Books",
+                      textAlign: TextAlign.left,
                       style: GoogleFonts.inter(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        height: 1.5,
-                        letterSpacing: 0,
+                        fontSize: 36,
+                        fontWeight: FontWeight.w700,
+                        height: 1.0,
+                        letterSpacing: -2,
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(height: 4),
-                    Text(
-                      "Join Now",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        height: 1.5,
-                        letterSpacing: 0,
-                        color: Color(0xff002F6C),
-                        decoration: TextDecoration.underline,
-                        decorationColor: Color(0xff002F6C),
-                        decorationStyle: TextDecorationStyle.solid,
-                      ),
-                    ),
-                  ],
+                  ),
+                ),
+
+              const SizedBox(height: 60),
+
+              HorizontalCourseList(),
+              if (!isWeb) ...[
+                const SizedBox(height: 28),
+                HorizontalCourseList(),
+                const SizedBox(height: 50),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: exploreSection,
                 ),
               ],
-            ),
-          ),
 
-          SizedBox(height: 98),
-        ],
-      ),
+              if (isWeb) const SizedBox(height: 195),
+              if (!isWeb) const SizedBox(height: 98),
+            ],
+          ),
+        );
+      },
     );
   }
 }
 
 class HorizontalCourseList extends StatelessWidget {
   final List<Map<String, String>> courses = [
+    {
+      'title': 'Human Anatomy & Physiology Essentials',
+      'price': '\Rs. 49.99',
+      'image': 'assets/images/book.png',
+    },
+    {
+      'title': 'Foundations of Modern Physics',
+      'price': '\Rs. 39.99',
+      'image': 'assets/images/book.png',
+    },
+    {
+      'title': 'Foundations of Modern Physics',
+      'price': '\Rs. 59.99',
+      'image': 'assets/images/book.png',
+    },
+    {
+      'title': 'Human Anatomy & Physiology Essentials',
+      'price': '\Rs. 49.99',
+      'image': 'assets/images/book.png',
+    },
+    {
+      'title': 'Foundations of Modern Physics',
+      'price': '\Rs. 39.99',
+      'image': 'assets/images/book.png',
+    },
+    {
+      'title': 'Foundations of Modern Physics',
+      'price': '\Rs. 59.99',
+      'image': 'assets/images/book.png',
+    },
     {
       'title': 'Human Anatomy & Physiology Essentials',
       'price': '\Rs. 49.99',
@@ -154,7 +220,6 @@ class HorizontalCourseList extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 12),
-
                 Text(
                   course['title']!,
                   overflow: TextOverflow.ellipsis,
