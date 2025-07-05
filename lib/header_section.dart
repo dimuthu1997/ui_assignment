@@ -7,147 +7,281 @@ class HeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/grid1.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      padding: const EdgeInsets.symmetric(vertical: 44),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: [
-                ShaderMask(
-                  shaderCallback:
-                      (bounds) => const LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [Color(0xFF002F6C), Color(0xFF013D8C)],
-                      ).createShader(bounds),
-                  blendMode: BlendMode.srcIn,
-                  child: Text(
-                    "Online Learning That Fits Your Life.",
-                    style: GoogleFonts.inter(
-                      fontSize: 71,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: -2,
-                      height: 1,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 36),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset('assets/images/quote.png', fit: BoxFit.cover),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        "Unlock limitless learning—anytime, anywhere. Elevate your future with online education.",
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.inter(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          height: 1.6875,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isWide = constraints.maxWidth > 900;
+
+        return Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image:
+                  isWide
+                      ? const AssetImage('assets/images/grid2.png')
+                      : const AssetImage('assets/images/grid1.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          padding: EdgeInsets.only(
+            top: isWide ? 71 : 44,
+            left: isWide ? 71 : 0,
+            right: isWide ? 112 : 0,
+            bottom: isWide ? 76 : 0,
+          ),
+          child:
+              isWide
+                  ? Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ShaderMask(
+                              shaderCallback:
+                                  (bounds) => const LinearGradient(
+                                    begin: Alignment.centerLeft,
+                                    end: Alignment.centerRight,
+                                    colors: [
+                                      Color(0xFF002F6C),
+                                      Color(0xFF013D8C),
+                                    ],
+                                  ).createShader(bounds),
+                              blendMode: BlendMode.srcIn,
+                              child: Text(
+                                "Online Learning That Fits Your Life.",
+                                style: GoogleFonts.inter(
+                                  fontSize: 82,
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: -2,
+                                  height: 1.2,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 36),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Image.asset(
+                                  'assets/images/quote.png',
+                                  fit: BoxFit.cover,
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    "Unlock limitless learning—anytime,\nanywhere. Elevate your future with online education.",
+                                    style: GoogleFonts.inter(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w400,
+                                      height: 1.6,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 36),
+                            Row(
+                              children: [
+                                RoundedButton(
+                                  width: 196,
+                                  label: "Join with Us",
+                                  labelStyle: GoogleFonts.inter(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
+                                  ),
+                                  color: const Color(0xff002F6C),
+                                  icon: const Icon(
+                                    size: 24,
+                                    Icons.arrow_outward,
+                                    color: Colors.white,
+                                  ),
+                                  boarderWidth: 2,
+                                  height: 55,
+                                  borderColor: const Color(0xff002F6C),
+                                  textColor: Colors.white,
+                                ),
+                                const SizedBox(width: 12),
+                                RoundedButton(
+                                  width: 248,
+                                  label: "View Online Classes",
+                                  labelStyle: GoogleFonts.inter(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xff002F6C),
+                                  ),
+                                  color: Colors.white,
+                                  boarderWidth: 1,
+                                  height: 55,
+                                  borderColor: const Color(0xff002F6C),
+                                  textColor: const Color(0xff002F6C),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 36),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: const [
+                                _StatsColumn(
+                                  number: "99",
+                                  label: "Student\nSatisfaction",
+                                ),
+                                SizedBox(width: 53),
+                                _StatsColumn(
+                                  number: "45",
+                                  label: "Expert\nTeachers",
+                                ),
+                                SizedBox(width: 53),
+                                _StatsColumn(
+                                  number: "88",
+                                  label: "Top-Rated\nCourses",
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 36),
-                RoundedButton(
-                  width: double.infinity,
-                  label: "Join with Us",
-                  labelStyle: GoogleFonts.inter(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    height: 1.0,
-                    letterSpacing: -0.3,
-                    color: Colors.white,
+                      const SizedBox(width: 32),
+                      Expanded(
+                        flex: 2,
+                        child: Image.asset(
+                          'assets/images/image_web.png',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ],
+                  )
+                  : Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          children: [
+                            ShaderMask(
+                              shaderCallback:
+                                  (bounds) => const LinearGradient(
+                                    begin: Alignment.centerLeft,
+                                    end: Alignment.centerRight,
+                                    colors: [
+                                      Color(0xFF002F6C),
+                                      Color(0xFF013D8C),
+                                    ],
+                                  ).createShader(bounds),
+                              blendMode: BlendMode.srcIn,
+                              child: Text(
+                                "Online Learning That Fits Your Life.",
+                                style: GoogleFonts.inter(
+                                  fontSize: 71,
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: -1,
+                                  height: 1.2,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 36),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.asset(
+                                  'assets/images/quote.png',
+                                  fit: BoxFit.cover,
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    "Unlock limitless learning—anytime, \nanywhere. Elevate your future with \nonline education.",
+                                    maxLines: 3,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.inter(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      height: 1.6875,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 36),
+                            RoundedButton(
+                              width: double.infinity,
+                              label: "Join with Us",
+                              labelStyle: GoogleFonts.inter(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
+                              color: const Color(0xff002F6C),
+                              icon: const Icon(
+                                Icons.arrow_outward,
+                                color: Colors.white,
+                              ),
+                              boarderWidth: 2,
+                              height: 54,
+                              borderColor: const Color(0xff002F6C),
+                              textColor: Colors.white,
+                            ),
+                            const SizedBox(height: 12),
+                            RoundedButton(
+                              width: double.infinity,
+                              label: "View Online Classes",
+                              labelStyle: GoogleFonts.inter(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xff002F6C),
+                              ),
+                              color: Colors.white,
+                              boarderWidth: 1,
+                              height: 54,
+                              borderColor: const Color(0xff002F6C),
+                              textColor: const Color(0xff002F6C),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 27),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 13),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            _StatsColumn(
+                              number: "99",
+                              label: "Student\nSatisfaction",
+                            ),
+                            SizedBox(width: 10),
+                            _StatsColumn(
+                              number: "45",
+                              label: "Expert\nTeachers",
+                            ),
+                            SizedBox(width: 10),
+                            _StatsColumn(
+                              number: "88",
+                              label: "Top-Rated\nCourses",
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 27),
+                      Image.asset(
+                        'assets/images/image_mobile.png',
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    ],
                   ),
-                  color: const Color(0xff002F6C),
-                  icon: const Icon(
-                    Icons.arrow_outward,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                  boarderWidth: 2,
-                  height: 54,
-                  borderColor: const Color(0xff002F6C),
-                  textColor: Colors.white,
-                ),
-                const SizedBox(height: 12),
-                RoundedButton(
-                  width: double.infinity,
-                  label: "View Online Classes",
-                  labelStyle: GoogleFonts.inter(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    height: 1.0,
-                    letterSpacing: -0.3,
-                    color: Color(0xff002F6C),
-                  ),
-                  color: Colors.white,
-                  boarderWidth: 1,
-                  height: 54,
-                  borderColor: const Color(0xff002F6C),
-                  textColor: const Color(0xff002F6C),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 27),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 13),
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    _StatsColumn(
-                      number: "99",
-                      plusFontSize: 35,
-                      label: "Student\nSatisfaction",
-                    ),
-                    _StatsColumn(
-                      number: "45",
-                      plusFontSize: 35,
-                      label: "Expert\nTeachers",
-                    ),
-                    _StatsColumn(
-                      number: "88",
-                      plusFontSize: 35,
-                      label: "Top-Rated\nCourses",
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
-          const SizedBox(height: 27),
-          Image.asset('assets/images/image_mobile.png', fit: BoxFit.cover),
-        ],
-      ),
+        );
+      },
     );
   }
 }
 
 class _StatsColumn extends StatelessWidget {
   final String number;
-  final double plusFontSize;
   final String label;
 
-  const _StatsColumn({
-    required this.number,
-    required this.label,
-    this.plusFontSize = 35,
-  });
+  const _StatsColumn({required this.number, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -178,7 +312,7 @@ class _StatsColumn extends StatelessWidget {
                   TextSpan(
                     text: '+',
                     style: GoogleFonts.inter(
-                      fontSize: plusFontSize,
+                      fontSize: 35, // directly used here
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
                     ),
