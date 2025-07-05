@@ -49,12 +49,12 @@ class HeaderSection extends StatelessWidget {
                                   ).createShader(bounds),
                               blendMode: BlendMode.srcIn,
                               child: Text(
-                                "Online Learning That Fits Your Life.",
+                                "Online Learning \nThat Fits Your Life.",
                                 style: GoogleFonts.inter(
                                   fontSize: 82,
                                   fontWeight: FontWeight.w900,
-                                  letterSpacing: -2,
-                                  height: 1.2,
+                                  letterSpacing: -4.9,
+                                  height: 92.11 / 82,
                                   color: Colors.white,
                                 ),
                               ),
@@ -157,6 +157,7 @@ class HeaderSection extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ShaderMask(
                               shaderCallback:
@@ -170,12 +171,12 @@ class HeaderSection extends StatelessWidget {
                                   ).createShader(bounds),
                               blendMode: BlendMode.srcIn,
                               child: Text(
-                                "Online Learning That Fits Your Life.",
+                                "Online \nLearning \nThat Fits \nYour Life.",
                                 style: GoogleFonts.inter(
                                   fontSize: 71,
                                   fontWeight: FontWeight.w900,
-                                  letterSpacing: -1,
-                                  height: 1.2,
+                                  letterSpacing: -2,
+                                  height: 58 / 71,
                                   color: Colors.white,
                                 ),
                               ),
@@ -312,7 +313,7 @@ class _StatsColumn extends StatelessWidget {
                   TextSpan(
                     text: '+',
                     style: GoogleFonts.inter(
-                      fontSize: 35, // directly used here
+                      fontSize: 35,
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
                     ),
