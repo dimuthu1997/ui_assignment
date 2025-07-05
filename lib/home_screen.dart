@@ -140,8 +140,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                icon: Image.asset('assets/images/logo.png', height: 48),
-                padding: EdgeInsets.zero,
+                icon: Image.asset('assets/images/logo.png', height: 32),
                 onPressed: () {},
               ),
               const Icon(Icons.menu, color: Colors.white),
