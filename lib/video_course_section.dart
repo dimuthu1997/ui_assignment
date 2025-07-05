@@ -26,81 +26,180 @@ class VideoCourseSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment(-0.29, -1.0),
-          end: Alignment(1.0, 1.0),
-          colors: [Color(0xFF002F6C), Color(0xFF0047A2)],
-        ),
-      ),
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 86),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(
-                  "Study Smarter with On-Demand Video Courses",
-                  style: GoogleFonts.inter(
-                    fontSize: 36,
-                    fontWeight: FontWeight.w700,
-                    height: 1.2,
-                    letterSpacing: -1.2,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 32),
-              Image.asset('assets/images/image2_mobile.png', fit: BoxFit.cover),
-              const SizedBox(height: 24),
-              ...cardData.map((item) => _buildCourseCard(item)).toList(),
-              const SizedBox(height: 70),
-            ],
-          ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isWide = constraints.maxWidth > 900;
 
-          Positioned(
-            bottom: 65,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: RoundedButton(
-                width: 111,
-                label: "View All",
-                labelStyle: GoogleFonts.inter(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w800,
-                  height: 1.0,
-                  letterSpacing: -0.3,
-                  color: const Color(0xff002F6C),
-                ),
-                color: Colors.white,
-                icon: const Icon(
-                  Icons.arrow_outward,
-                  color: Color(0xff002F6C),
-                  size: 20,
-                ),
-                radius: 50,
-                boarderWidth: 2,
-                height: 30,
-                textColor: const Color(0xff002F6C),
-                isIconRight: true,
-              ),
+        return Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image:
+                  isWide
+                      ? AssetImage('assets/images/b2.png')
+                      : AssetImage('assets/images/m2.png'),
+              fit: BoxFit.cover,
             ),
           ),
-        ],
-      ),
+          padding: EdgeInsets.only(
+            left: isWide ? 112 : 0,
+            right: isWide ? 112 : 0,
+            top: isWide ? 158 : 0,
+            bottom: isWide ? 172 : 0,
+          ),
+          child:
+              isWide
+                  ? Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Stack(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Study Smarter \nwith On-Demand \nVideo Courses",
+                                  style: GoogleFonts.inter(
+                                    fontSize: 48,
+                                    fontWeight: FontWeight.w700,
+                                    height: 1.2,
+                                    letterSpacing: -1.2,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const SizedBox(height: 32),
+                                ...cardData
+                                    .map((item) => _buildCourseCard(item))
+                                    .toList(),
+                                const SizedBox(height: 80),
+                              ],
+                            ),
+
+                            Positioned(
+                              bottom: 75,
+                              left: 0,
+                              right: 0,
+                              child: Center(
+                                child: RoundedButton(
+                                  width: 111,
+                                  label: "View All",
+                                  labelStyle: GoogleFonts.inter(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w800,
+                                    height: 1.0,
+                                    letterSpacing: -0.3,
+                                    color: const Color(0xff002F6C),
+                                  ),
+                                  color: Colors.white,
+                                  icon: const Icon(
+                                    Icons.arrow_outward,
+                                    color: Color(0xff002F6C),
+                                    size: 20,
+                                  ),
+                                  radius: 50,
+                                  boarderWidth: 2,
+                                  height: 30,
+                                  textColor: const Color(0xff002F6C),
+                                  isIconRight: true,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      const SizedBox(width: 102),
+
+                      Expanded(
+                        flex: 2,
+                        child: Image.asset(
+                          'assets/images/image2_web.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ],
+                  )
+                  : Stack(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 86),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Text(
+                              "Study Smarter with \nOn-Demand Video \nCourses",
+                              style: GoogleFonts.inter(
+                                fontSize: 36,
+                                fontWeight: FontWeight.w700,
+                                height: 1.2,
+                                letterSpacing: -1.2,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 32),
+                          Image.asset(
+                            'assets/images/image2_mobile.png',
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                          ),
+                          const SizedBox(height: 24),
+                          ...cardData
+                              .map(
+                                (item) => Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                  ),
+                                  child: _buildCourseCard(item),
+                                ),
+                              )
+                              .toList(),
+                          const SizedBox(height: 95),
+                        ],
+                      ),
+
+                      Positioned(
+                        bottom: 90,
+                        left: 0,
+                        right: 0,
+                        child: Center(
+                          child: RoundedButton(
+                            width: 111,
+                            label: "View All",
+                            labelStyle: GoogleFonts.inter(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w800,
+                              height: 1.0,
+                              letterSpacing: -0.3,
+                              color: const Color(0xff002F6C),
+                            ),
+                            color: Colors.white,
+                            icon: const Icon(
+                              Icons.arrow_outward,
+                              color: Color(0xff002F6C),
+                              size: 20,
+                            ),
+                            radius: 50,
+                            boarderWidth: 2,
+                            height: 30,
+                            textColor: const Color(0xff002F6C),
+                            isIconRight: true,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+        );
+      },
     );
   }
 
   Widget _buildCourseCard(Map<String, String> item) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.only(bottom: 12),
       child: Container(
-        margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.2),
